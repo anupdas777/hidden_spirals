@@ -1,7 +1,12 @@
-### 1. Install the requirements
-- required python version: 3.8 or 3.9
-- run `pip install -r requirements.txt`
-- for certain parts of the notebook (described in the notebook), a cuda GPU is required (torch with cuda support will be installed in requirements)
+### 1. Install the following requirements and python packages
+- required python version: 3.11.0
+- pip install numpy
+- pip install pandas
+- pip install matplotlib
+- pip install scipy
+- pip install scikit-learn
+- pip install mpl-tools
+- pip install pylablib
 
 ### 2. Download the data
 - Download the associated data
