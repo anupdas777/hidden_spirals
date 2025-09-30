@@ -10,7 +10,7 @@
 
 ### 2. Simulation example 1
 - Simulation example 1 namely "wave_spatial_autocorrelation_ica.ipynb" is a jupyterlab notebook which provides an example simulation demonstrating the spatial autocorrelation preserving surrogate data analysis procedure employed in our paper. 
-- This example simulates a rotational traveling wave, which ubiquitous in our experimental data.
+- This example simulates a rotational traveling wave, which are present in our experimental data.
 - It also simulates 500 permutations of circularly shifted (vertical or horizontal or both) traveling waves of the original rotational wave. Note that this circular shuffling preserves the spatial autocorrelation of the rotational traveling wave. 
 - These shuffled waves are then passed onto complex ICA to estimate the modes. These are then compared to the original rotational wave to compute a distribution or histogram of error magnitudes. The original rotational wave is similarly passed onto ICA and the empirical error is computed. The error in the later case is significantly lower compared to the error for the circularly shuffled waves.
 
