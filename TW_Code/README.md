@@ -24,7 +24,7 @@
 - The function "par_robust_reg" takes the power spectral density as input and then estimates the robust regression linear estimate of this power spectrum. 
 - The function "par_find_peaks_by_chan2" takes the power values and their frequencies as inputs and then estimates the peak frequencies present in the power spectral density. 
 - The function "circ_lin_regress" is the circular linear regression model to estimate traveling waves. This function takes the phases and electrode coordinates as well as a predefined set of grid parameters spatial frquency and wave directions, to estimate the features of traveling waves such as direciton, spatial frequency, and speed. This function uses a multiresolution parameter estimation approach by first estimating parameters on a coarse grid and then re-estimating parameters on a finer grid. Such a multiresolution parameter estimation approach keeps the computational complexity of the circular linear regression approach tractable.
-- RAM_helpers.py contains a number of helper functions which can be used to extract and load eeg, events, and other detailed information about the spatial and verbal memory experiments used in our paper. Details about these functions are provided inside RAM_helpers.py.
+- RAM_helpers.py contains a number of helper functions which can be used to extract and load eeg, events, and other detailed information about the working memory experiment used in our paper. Details about these functions are provided inside RAM_helpers.py.
 
 ### 5. Anup-sternberg-grids-2D-encoding-fine.ipynb 
 - This jupyterlab notebook shows a demonstration of how to load the subjects in the working memory experiment and run the traveling wave analysis.
