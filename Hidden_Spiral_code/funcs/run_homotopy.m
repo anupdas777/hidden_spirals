@@ -1,10 +1,6 @@
 function [success, homotopy_record, temp_curve] = run_homotopy(...
     Target_temp, c, d, k, mode, stab_tol, pos_tol, zero_tol, expected_max, ...
     neighbor_idx, neighbor_count, num_steps, dt, conv_tol, cleanup_steps, perturb_sigma, checkerboard_tol)
-    success = false;
-    homotopy_record = zeros(mode, mode, 81);
-    temp_curve = zeros(1, 81);
-
     [success, homotopy_record, temp_curve] = run_homotopy_attempt(...
         Target_temp, c, d, k, mode, stab_tol, pos_tol, zero_tol, expected_max, ...
         neighbor_idx, neighbor_count, num_steps, dt, conv_tol, cleanup_steps, perturb_sigma);
@@ -34,7 +30,7 @@ function [success, homotopy_record, temp_curve] = run_homotopy_attempt(...
         scale = 1.0125 - 0.0125 * p;
 
         phases = evolve_phases(phases, w * scale, dhp, num_steps, dt, conv_tol);
-        if scale == 0 && cleanup_steps > 0
+        if p == 81 && cleanup_steps > 0
             phases = evolve_phases(phases, zeros(mode), dhp, cleanup_steps, dt, conv_tol);
         end
         homotopy_record(:, :, p) = mod(phases - phases(1, 1), 2 * pi);

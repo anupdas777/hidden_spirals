@@ -24,15 +24,10 @@ function f = spectral_objective(theta, params, neighbor_idx, neighbor_count)
         StaMa(i, i) = -row_sum;
     end
 
-    try
-        opts_eig.tol = 1e-6;
-        opts_eig.maxit = 200;
-        opts_eig.disp = 0;
-        f = real(eigs(sparse(StaMa), 1, 'largestreal', opts_eig));
-    catch
-        all_eigs = eig(StaMa);
-        f = max(real(all_eigs));
-    end
+    opts_eig.tol = 1e-6;
+    opts_eig.maxit = 200;
+    opts_eig.disp = 0;
+    f = real(eigs(sparse(StaMa), 1, 'largestreal', opts_eig));
 
     if ~isfinite(f)
         f = 1e10;
