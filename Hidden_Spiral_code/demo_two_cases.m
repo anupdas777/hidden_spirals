@@ -40,7 +40,6 @@ optim_options = optimoptions('fmincon', 'Display', 'off', 'Algorithm', 'sqp', ..
     'MaxFunctionEvaluations', 150, 'OptimalityTolerance', 5e-4, 'StepTolerance', 1e-5);
 
 cases(1).name = 'continuation_demo';
-cases(1).source = 'Encoding / TJ007 / trial 1752';
 cases(1).expected_method = 1;
 cases(1).phase8 = [ ...
     0.000000000000 3.278542876244 1.272622048855 2.432067751884 2.301191687584 2.472756743431 1.511756032705 2.466531157494; ...
@@ -53,7 +52,6 @@ cases(1).phase8 = [ ...
     4.293663382530 3.652017474174 3.650933146477 4.923508826886 0.817004054785 5.061159078275 3.678972125053 3.421165108681];
 
 cases(2).name = 'homotopy_demo';
-cases(2).source = 'Encoding / UP021 / trial 956';
 cases(2).expected_method = 2;
 cases(2).phase8 = [ ...
     0.000000000000 5.982154581939 5.867390666400 3.916676257049 4.381125185882 4.079091523086 3.042434602976 4.043632004653; ...
@@ -66,6 +64,7 @@ cases(2).phase8 = [ ...
     5.721482131873 5.792619262134 5.382454131042 5.315390203391 5.192284677421 4.867781851684 4.663597557937 2.015659838915];
 
 results = repmat(struct(), numel(cases), 1);
+method_titles = {'Final continuation', 'Final homotopy'};
 
 for i = 1:numel(cases)
     phase8 = cases(i).phase8;
@@ -130,7 +129,6 @@ for i = 1:numel(cases)
     end
 
     results(i).name = cases(i).name;
-    results(i).source = cases(i).source;
     results(i).method = method;
     results(i).phase8 = phase8;
     results(i).target29 = target29;
@@ -140,8 +138,8 @@ for i = 1:numel(cases)
     results(i).k = k_val;
     results(i).opt_temp = opt_temp;
 
-    f = figure('Visible', 'off', 'Position', [100 100 1080 360]);
-    tiledlayout(1, 3, 'Padding', 'compact', 'TileSpacing', 'compact');
+    f = figure('Visible', 'off', 'Position', [100 100 780 360]);
+    tiledlayout(1, 2, 'Padding', 'compact', 'TileSpacing', 'compact');
 
     nexttile;
     imagesc(phase8);
@@ -152,29 +150,16 @@ for i = 1:numel(cases)
     title('Original 8x8');
 
     nexttile;
-    imagesc(target29);
-    axis square;
-    colormap('hsv');
-    clim([0 2*pi]);
-    colorbar;
-    title('Interpolated 29x29');
-
-    nexttile;
     imagesc(homotopy_record(:, :, end));
     axis square;
     colormap('hsv');
     clim([0 2*pi]);
     colorbar;
-    if method == 1
-        title('Final continuation');
-    else
-        title('Final homotopy');
-    end
+    title(method_titles{method});
 
-    sgtitle(sprintf('%s | %s', cases(i).name, cases(i).source));
+    sgtitle(cases(i).name);
     exportgraphics(f, fullfile(out_dir, [cases(i).name '.png']), 'Resolution', 180);
     close(f);
 end
 
 save(fullfile(out_dir, 'demo_two_clean_cases.mat'), 'results', 'cfg');
-disp(struct2table(rmfield(results, {'phase8', 'target29', 'homotopy_record'})));
